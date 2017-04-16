@@ -90,8 +90,8 @@
 	"caracteristicas": "La mayor parte de la producción de camarón de cultivo se exporta entero (con cabeza) y sin cabeza a países europeos, en diferentes tallas o conteos. Una parte de la producción se comercializa en el mercado nacional.",
 	"usos": "Se comercializa en colas frescas o descongeladas, en pescaderías, supermercados y ferias del agricultor.",
 	"longitud": "No existe una longitud estándar pues se vende por talla.",
-	"peso": "\/assets\/mariscos\/camaron_blanco_acuicultura.png",
-	"imagen": "La talla comercial más común es 41-50 (significa que una libra debe contener entre 41-50 camarones). También se puede adquirir en otros tamaños. El tamaño determinará su precio. Una libra equivale a 453.5 gramos.",
+	"peso": "La talla comercial más común es 41-50 (significa que una libra debe contener entre 41-50 camarones). También se puede adquirir en otros tamaños. El tamaño determinará su precio. Una libra equivale a 453.5 gramos.",
+	"imagen": "\/assets\/mariscos\/camaron_blanco_acuicultura.png",
 	"coloracion": "Su concha es de color verde musgo. Si la cáscara y\/o carne se decolora a un color rojizo como el camarón Fidel denota mala calidad.",
 	"olor": "El olor es fresco característico de la especie, no debe poseer olores fuertes ni rancios."
 }, {
@@ -119,7 +119,7 @@
 	"coloracion": "En los individuos de mayor tamaño su concha es de color marrón claro, en los de tamaño promedio su concha es rosado pálido y su carne es blanca o rosada. No debe poseer bordes amarillos. Si el producto pierde color, la carne se suaviza.",
 	"olor": "El olor es fresco característico de la especie, no debe poseer olores fuertes ni rancios"
 }, {
-	"categoria": "2",
+	"categoria": "1",
 	"comun": "Congrio",
 	"cientifico": "Brotula clarkae, Lepophidium prorates",
 	"origen": "Especie silvestre de profundidad. Se captura con línea larga (longline, en inglés), en aguas profundas nacionales, principalmente en el litoral Pacífico. Generalmente habita arrecifes rocosos y fondos arenosos adyacentes a profundidades de 75 metros en adelante.",

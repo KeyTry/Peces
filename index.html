@@ -1,76 +1,106 @@
 <!doctype html>
 <html class="no-js" lang="">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Comida del Mar</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/master.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Comida del Mar</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/master.css">
+    </head>
 
-<body>
-    <h1>Comida del Mar</h1>
-    <div class="options">
-        <button class="option-button" type="button" name="button" id="1">Peces</button>
-        <br>
-        <button class="option-button" type="button" name="button" id="2">Mariscos</button>
-    </div>
+    <body>
+        <h1>Comida del Mar</h1>
+        <div class="options">
+            <button class="option-button" type="button" name="button" id="1">Peces</button>
+            <br>
+            <button class="option-button" type="button" name="button" id="2">Mariscos</button>
+        </div>
 
-    <div class="info">
+        <div class="info">
+            <img src="" alt="" id="imagen">
+            <h3>Nombre Común</h3>
+            <p id="comun"></p>
+            <button class="movement-button" type="button" name="button" id="atras">atras</button>
+            <button class="movement-button" type="button" name="button" id="adelante">adelante</button>
+        </div>
 
-    </div>
+        <script src="js/jquery-3.2.0.min.js"></script>
+        <script>
+            $('document').ready(function() {
+                $('.option-button').click(function() {
+                    var option = this.id;
+                    console.log('option button pressed: ' + option);
+                    $.ajax({
+                        url: 'all.json',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function(data) {
+                            console.log('Cantidad de Datos: ' + data.length);
+                            var len = data.length;
 
-    <script src="js/jquery-3.2.0.min.js"></script>
-    <script>
-        $('document').ready(function() {
-            $('.option-button').click(function() {
-                var option = this.id;
-                console.log('option button pressed: ' + option);
-                $.ajax({
-                    url: 'all.json',
-                    type: 'GET',
-                    dataType: "json",
-                    success: function(data) {
-                        console.log('Cantidad de Datos: ' + data.length);
-                        var len = data.length;
+                            var categoria = [];
+                            var comun = [];
+                            var cientifico = [];
+                            var origen = [];
+                            var caracteristicas = [];
+                            var usos = [];
+                            var longitud = [];
+                            var peso = [];
+                            var imagen = [];
+                            var coloracion = [];
+                            var olor = [];
 
-                        var categoria = [];
-                        var comun = [];
-                        var cientifico = [];
-                        var origen = [];
-                        var caracteristicas = [];
-                        var usos = [];
-                        var longitud = [];
-                        var peso = [];
-                        var imagen = [];
-                        var coloracion = [];
-                        var olor = [];
+                            var j = 0;
 
-                        var j = 0;
+                            var categoriaLength = 0;
+                            var counter = 0;
 
-                        console.log('buscando categoria: ' + option);
-                        //comun, cientifico, origen, caracteristicas, usos, longitud, peso, imagen, coloracion, olor
-                        for (var i = 0; i < data.length; i++) {
-                            if (data[i].categoria == option) {
-                                categoria[j] = data[i].categoria;
-                                comun[j] = data[i].comun;
-                                console.log('Elemento: ' + comun[j] + ', Categoría: ' + categoria[j]);
-                                j++;
+                            console.log('buscando categoria: ' + option);
+                            //comun, cientifico, origen, caracteristicas, usos, longitud, peso, imagen, coloracion, olor
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].categoria == option) {
+                                    categoria[j] = data[i].categoria;
+                                    comun[j] = data[i].comun;
+                                    imagen[j] = data[i].imagen;
+                                    console.log('Elemento: ' + comun[j] + ', Categoría: ' + categoria[j] + ', Imagen SRC: ' + imagen[j]);
+                                    j++;
+                                    categoriaLength++;
+                                }
                             }
+                            console.log('cantidad de elementos en la categoria ' + option + ': ' + j);
+                            $("#imagen").attr("src", "/peces/" + imagen[0] + "");
+                            $("#comun").empty();
+                            $("#comun").append(comun[0]);
+                            $("#adelante").click(function() {
+                                if (counter < categoriaLength - 1) {
+                                    counter++;
+                                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
+                                    $("#comun").empty();
+                                    $("#comun").append(comun[counter]);
+                                    console.log('counter: ' + counter);
+                                }
+                            })
+                            $("#atras").click(function() {
+                                if (counter > 0) {
+                                    counter--;
+                                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
+                                    $("#comun").empty();
+                                    $("#comun").append(comun[counter]);
+                                    console.log('counter: ' + counter);
+                                }
+                            })
+                        },
+                        error: function(jqXHR, textStatus, error) {
+                            alert("error: " + jqXHR.responseText);
                         }
-                        console.log('cantidad de elementos en la categoria ' + option + ': ' + j);
-                    },
-                    error: function(jqXHR, textStatus, error) {
-                        alert("error: " + jqXHR.responseText);
-                    }
+                    });
                 });
+
             });
 
-        });
-
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
