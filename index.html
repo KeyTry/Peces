@@ -8,55 +8,91 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/master.css">
+        <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
     </head>
 
     <body>
         <h1>Comida del Mar</h1>
         <div class="options">
-            <button class="option-button" type="button" name="button" id="1">Peces</button>
+            <button class="option-button" type="button" name="button" id="1"><h1>Peces</h1></button>
             <br>
-            <button class="option-button" type="button" name="button" id="2">Mariscos</button>
+            <button class="option-button" type="button" name="button" id="2"><h1>Mariscos</h1></button>
         </div>
 
         <div class="info">
+            <button class="movement-button" type="button" name="button" id="atras"><i class="fa fa-caret-left fa-4x" aria-hidden="true"></i></button>
+            <button class="movement-button" type="button" name="button" id="adelante"><i class="fa fa-caret-right fa-4x" aria-hidden="true"></i></button>
+            <!-- comun, cientifico, origen, caracteristicas, usos, longitud, peso, imagen, coloracion, olor -->
             <img src="" alt="" id="imagen">
-            <h3>Nombre Común</h3>
-            <p id="comun"></p>
-            <button class="movement-button" type="button" name="button" id="atras">atras</button>
-            <button class="movement-button" type="button" name="button" id="adelante">adelante</button>
+            <h1 id="comun"></h1>
+            <h3>Nombre Científico</h3>
+            <p id="cientifico"></p>
+            <h3>Origen</h3>
+            <p id="origen"></p>
+            <h3>Características</h3>
+            <p id="caracteristicas"></p>
+            <h3>Usos</h3>
+            <p id="usos"></p>
+            <h3>Longitud</h3>
+            <p id="longitud"></p>
+            <h3>Peso</h3>
+            <p id="peso"></p>
+            <h3>Coloración</h3>
+            <p id="coloracion"></p>
+            <h3>Olor</h3>
+            <p id="olor"></p>
         </div>
 
         <script src="js/jquery-3.2.0.min.js"></script>
         <script>
+            var option;
+
+            var categoria = [];
+            var comun = [];
+            var cientifico = [];
+            var origen = [];
+            var caracteristicas = [];
+            var usos = [];
+            var longitud = [];
+            var peso = [];
+            var imagen = [];
+            var coloracion = [];
+            var olor = [];
+
+            var j = 0;
+
+            var counter = 0;
             $('document').ready(function() {
+                j = 0;
+                counter = 0;
                 $('.option-button').click(function() {
-                    var option = this.id;
+                    option = this.id;
+
+                    categoria = [];
+                    comun = [];
+                    cientifico = [];
+                    origen = [];
+                    caracteristicas = [];
+                    usos = [];
+                    longitud = [];
+                    peso = [];
+                    imagen = [];
+                    coloracion = [];
+                    olor = [];
+
+                    j = 0;
+                    counter = 0;
+                    console.log('Reinicio del counter: ' + counter);
                     console.log('option button pressed: ' + option);
                     $.ajax({
                         url: 'all.json',
                         type: 'GET',
                         dataType: "json",
                         success: function(data) {
+                            j = 0;
+                            counter = 0;
+
                             console.log('Cantidad de Datos: ' + data.length);
-                            var len = data.length;
-
-                            var categoria = [];
-                            var comun = [];
-                            var cientifico = [];
-                            var origen = [];
-                            var caracteristicas = [];
-                            var usos = [];
-                            var longitud = [];
-                            var peso = [];
-                            var imagen = [];
-                            var coloracion = [];
-                            var olor = [];
-
-                            var j = 0;
-
-                            var categoriaLength = 0;
-                            var counter = 0;
-
                             console.log('buscando categoria: ' + option);
                             //comun, cientifico, origen, caracteristicas, usos, longitud, peso, imagen, coloracion, olor
                             for (var i = 0; i < data.length; i++) {
@@ -64,40 +100,101 @@
                                     categoria[j] = data[i].categoria;
                                     comun[j] = data[i].comun;
                                     imagen[j] = data[i].imagen;
-                                    console.log('Elemento: ' + comun[j] + ', Categoría: ' + categoria[j] + ', Imagen SRC: ' + imagen[j]);
+                                    cientifico[j] = data[i].cientifico;
+                                    origen[j] = data[i].origen;
+                                    caracteristicas[j] = data[i].caracteristicas;
+                                    usos[j] = data[i].usos;
+                                    longitud[j] = data[i].longitud;
+                                    peso[j] = data[i].peso;
+                                    coloracion[j] = data[i].coloracion;
+                                    olor[j] = data[i].olor;
+                                    console.log('Elemento: ' + comun[j] + ', Categoría: ' + categoria[j]);
                                     j++;
-                                    categoriaLength++;
                                 }
                             }
                             console.log('cantidad de elementos en la categoria ' + option + ': ' + j);
                             $("#imagen").attr("src", "/peces/" + imagen[0] + "");
                             $("#comun").empty();
                             $("#comun").append(comun[0]);
-                            $("#adelante").click(function() {
-                                if (counter < categoriaLength - 1) {
-                                    counter++;
-                                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
-                                    $("#comun").empty();
-                                    $("#comun").append(comun[counter]);
-                                    console.log('counter: ' + counter);
-                                }
-                            })
-                            $("#atras").click(function() {
-                                if (counter > 0) {
-                                    counter--;
-                                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
-                                    $("#comun").empty();
-                                    $("#comun").append(comun[counter]);
-                                    console.log('counter: ' + counter);
-                                }
-                            })
+                            $("#cientifico").empty();
+                            $("#cientifico").append(cientifico[0]);
+                            $("#origen").empty();
+                            $("#origen").append(origen[0]);
+                            $("#caracteristicas").empty();
+                            $("#caracteristicas").append(caracteristicas[0]);
+                            $("#usos").empty();
+                            $("#usos").append(usos[0]);
+                            $("#longitud").empty();
+                            $("#longitud").append(longitud[0]);
+                            $("#peso").empty();
+                            $("#peso").append(peso[0]);
+                            $("#coloracion").empty();
+                            $("#coloracion").append(coloracion[0]);
+                            $("#olor").empty();
+                            $("#olor").append(olor[0]);
                         },
                         error: function(jqXHR, textStatus, error) {
                             alert("error: " + jqXHR.responseText);
                         }
                     });
                 });
-
+                $("#adelante").click(function() {
+                    console.log('Adelante presionado 1');
+                    if (counter < j - 1) {
+                        counter = counter + 1;
+                    } else {
+                        counter = 0;
+                    }
+                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
+                    $("#comun").empty();
+                    $("#comun").append(comun[counter]);
+                    $("#cientifico").empty();
+                    $("#cientifico").append(cientifico[counter]);
+                    $("#origen").empty();
+                    $("#origen").append(origen[counter]);
+                    $("#caracteristicas").empty();
+                    $("#caracteristicas").append(caracteristicas[counter]);
+                    $("#usos").empty();
+                    $("#usos").append(usos[counter]);
+                    $("#longitud").empty();
+                    $("#longitud").append(longitud[counter]);
+                    $("#peso").empty();
+                    $("#peso").append(peso[counter]);
+                    $("#coloracion").empty();
+                    $("#coloracion").append(coloracion[counter]);
+                    $("#olor").empty();
+                    $("#olor").append(olor[counter]);
+                    console.log('Adelante presionado');
+                    console.log('counter: ' + counter);
+                })
+                $("#atras").click(function() {
+                    if (counter > 0) {
+                        counter = counter - 1;
+                    } else {
+                        counter = j - 1;
+                    }
+                    $("#imagen").attr("src", "/peces/" + imagen[counter] + "");
+                    $("#comun").empty();
+                    $("#comun").append(comun[counter]);
+                    $("#cientifico").empty();
+                    $("#cientifico").append(cientifico[counter]);
+                    $("#origen").empty();
+                    $("#origen").append(origen[counter]);
+                    $("#caracteristicas").empty();
+                    $("#caracteristicas").append(caracteristicas[counter]);
+                    $("#usos").empty();
+                    $("#usos").append(usos[counter]);
+                    $("#longitud").empty();
+                    $("#longitud").append(longitud[counter]);
+                    $("#peso").empty();
+                    $("#peso").append(peso[counter]);
+                    $("#coloracion").empty();
+                    $("#coloracion").append(coloracion[counter]);
+                    $("#olor").empty();
+                    $("#olor").append(olor[counter]);
+                    console.log('Atrás presionado');
+                    console.log('counter: ' + counter);
+                })
             });
 
         </script>
